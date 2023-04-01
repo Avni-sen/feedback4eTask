@@ -1,26 +1,57 @@
-﻿using feedback4eTask.DataAccess.Abstract;
+﻿using feedback4eTask.Business.Handlers.Airports.Abstract;
+using feedback4eTask.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
-namespace feedback4eTask.WebAPI.Controllers
+namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AirportsController : ControllerBase
     {
-        IAirportRepository _productService;
+        IAirportService _airportService;
 
-        public AirportsController(IAirportRepository productService)
+        public AirportsController(IAirportService airportService)
         {
-            _productService = productService;
+            _airportService = airportService;
         }
 
         [HttpGet("getcountries")]
         public async Task<IActionResult> GetCountries()
         {
-            var result = await _productService.GetCountries();
-            if (result.Any())
+            var result = await _airportService.GetCountries();
+            if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpGet("getcitiesbycountryname")]
+        public async Task<IActionResult> getCitiesByCountryName(string countryname)
+        {
+            var result = await _airportService.GetCitiesByCountryName(countryname);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+
+        [Produces("application/json", "text/plain")]
+        [HttpPost]
+        public async Task<IActionResult> calculateAirportsMesurement([FromBody] CalculateAirportsRequest request)
+        {
+            var result = await _airportService.CalculateAirportsMesurement(request);
+            if (result.Success)
+            {
+                return Ok(result.Data);
             }
             else
             {
