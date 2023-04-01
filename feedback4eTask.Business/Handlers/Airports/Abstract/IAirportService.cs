@@ -7,6 +7,6 @@ namespace feedback4eTask.Business.Handlers.Airports.Abstract
     {
         Task<IDataResult<IEnumerable<Airport>>> GetCountries();
         Task<IDataResult<IEnumerable<Airport>>> GetCitiesByCountryName(string countryname);
-        Task<IDataResult<int>> CalculateAirportsMesurement(CalculateAirportsRequest calculateAirportsRequest);
+        Task<IDataResult<double>> CalculateAirportsMesurement(CalculateAirportsRequest calculateAirportsRequest);
     }
 }

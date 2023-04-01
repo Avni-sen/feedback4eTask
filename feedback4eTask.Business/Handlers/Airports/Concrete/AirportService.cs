@@ -30,7 +30,7 @@ namespace feedback4eTask.Business.Handlers.Airports.Abstract
         }
 
 
-        public async Task<IDataResult<int>> CalculateAirportsMesurement(CalculateAirportsRequest calculateAirportsRequest)
+        public async Task<IDataResult<double>> CalculateAirportsMesurement(CalculateAirportsRequest calculateAirportsRequest)
         {
             // işlemler burada yapılacak
             double ToRadians(double degrees)
@@ -53,7 +53,7 @@ namespace feedback4eTask.Business.Handlers.Airports.Abstract
             var distance = earthRadius * c;
 
             // mil cinsinden uzaklık
-            return new SuccessDataResult<int>((int)distance);
+            return new SuccessDataResult<double>((double)distance);
         }
     }
 }
