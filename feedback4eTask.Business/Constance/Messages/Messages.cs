@@ -3,5 +3,6 @@
     public class Messages
     {
         public static string Calculating = "Hesaplanıyor";
+        public static string Error = "Hata Çıktı";
     }
 }
